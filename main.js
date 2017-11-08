@@ -129,8 +129,11 @@ console.log( 'The total number of transactions is:', totalTransactions );
   HINT(S):
   - Not all transactions are 'sales'.
 */
-var numSales;
 
+var sales = transactions.filter(function(transaction){
+  return transaction.type == 'sale'
+})
+var numSales = sales.length;
 /*
   Hey, welcome to the first question!
 
@@ -159,7 +162,11 @@ console.log( 'The total number of sales is:', numSales );
 /*
   Calculate the total number of 'purchases'.
 */
-var numPurchases;
+
+var purchases = transactions.filter(function(transaction){
+  return transaction.type == 'purchase'
+})
+var numPurchases = sales.length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -173,7 +180,11 @@ console.log( 'The total number of purchases is:', numPurchases );
   HINT(S):
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
-var numCashSales;
+
+var cashSales = transactions.filter(function(transaction) {
+  return transaction.type == 'sale' && transaction.paymentMethod == 'cash'
+})
+var numCashSales = cashSales.length;
 
 console.log( 'The total number of cash sales is:', numCashSales );
 
@@ -187,7 +198,11 @@ console.log( 'The total number of cash sales is:', numCashSales );
   HINT(S):
   - Make sure to exclude any 'sales' made by 'credit'!
 */
-var numCreditPurchases;
+
+var creditPurchases = transactions.filter(function(transaction) {
+  return transaction.type == 'purchase' && transaction.paymentMethod == 'credit'
+})
+var numCreditPurchases = creditPurchases.length;
 
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
