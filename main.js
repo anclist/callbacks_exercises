@@ -130,10 +130,10 @@ console.log( 'The total number of transactions is:', totalTransactions );
   - Not all transactions are 'sales'.
 */
 
-var sales = transactions.filter(function(transaction){
+
+var numSales = transactions.filter(function(transaction){
   return transaction.type == 'sale'
-})
-var numSales = sales.length;
+}).length;
 /*
   Hey, welcome to the first question!
 
@@ -163,10 +163,9 @@ console.log( 'The total number of sales is:', numSales );
   Calculate the total number of 'purchases'.
 */
 
-var purchases = transactions.filter(function(transaction){
+var numPurchases = transactions.filter(function(transaction){
   return transaction.type == 'purchase'
-})
-var numPurchases = sales.length;
+}).length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -181,10 +180,9 @@ console.log( 'The total number of purchases is:', numPurchases );
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
 
-var cashSales = transactions.filter(function(transaction) {
+var numCashSales = transactions.filter(function(transaction) {
   return transaction.type == 'sale' && transaction.paymentMethod == 'cash'
-})
-var numCashSales = cashSales.length;
+}).length;
 
 console.log( 'The total number of cash sales is:', numCashSales );
 
@@ -199,10 +197,9 @@ console.log( 'The total number of cash sales is:', numCashSales );
   - Make sure to exclude any 'sales' made by 'credit'!
 */
 
-var creditPurchases = transactions.filter(function(transaction) {
+var numCreditPurchases = transactions.filter(function(transaction) {
   return transaction.type == 'purchase' && transaction.paymentMethod == 'credit'
-})
-var numCreditPurchases = creditPurchases.length;
+}).length;
 
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
@@ -220,17 +217,15 @@ console.log( 'The total number of credit purchases is:', numCreditPurchases );
   - This array is allowed to contain duplicate values.
 */
 
-var hasVendor = transactions.filter(function(transaction) {
-    return transaction.vendor;
-})
 
-var vendors = hasVendor.map(function(transaction) {
+var uniqueVendors = transactions.filter(function(transaction) {
+    return transaction.vendor;
+}).map(function(transaction) {
   return transaction.vendor
 })
 
-var uniqueVendors = [...new Set(vendors)];
 
-console.log( 'The unique vendors are:', uniqueVendors );
+console.log( 'The unique vendors are:', uniqueVendors.toString() );
 
 
 // --------------------------------------------------
@@ -256,7 +251,10 @@ var customers = hasCustomer.map(function(transaction) {
 
 var uniqueCustomers = [...new Set(customers)];
 
-console.log( 'The unique customers are:', uniqueCustomers );
+
+// check filter with indexOf() alternative to Set()
+
+console.log( 'The unique customers are:', uniqueCustomers.toString() );
 
 
 // --------------------------------------------------
@@ -272,7 +270,16 @@ console.log( 'The unique customers are:', uniqueCustomers );
   - There may be more than 1 'sale' that includes 5 or more items.
   - Individual transactions do not have either `name` or `numItems` properties, we'll have to add them to the output.
 */
-var bigSpenders;
+
+
+var bigSpenders = transactions.filter(function(transaction){
+  return transaction.items.length >= 5 && transaction.type == 'sale'
+}).map(function(transaction) {
+  return {'name': transaction.customer, 'numItems': transaction.items.length}
+})
+
+
+
 
 console.log( 'The "big spenders" are:', bigSpenders );
 
