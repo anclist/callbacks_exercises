@@ -293,7 +293,13 @@ console.log( 'The "big spenders" are:', bigSpenders );
   HINT(S):
   - Transactions don't have 'prices', but their 'items' do!
 */
-var sumSales;
+var itemPrices = transactions[0].items.map( function(item){
+  return item.price;
+});
+
+var sumSales = itemPrices.reduce( function(accumulator, currentValue){
+  return accumulator + currentValue;
+});
 
 console.log( 'The sum of all sales is:', sumSales );
 
@@ -308,6 +314,8 @@ console.log( 'The sum of all sales is:', sumSales );
   - Your solution to 'QUESTION 08' is a good starting point!
   - Make sure to include 'price' information from *all* purchases.
 */
+
+
 
 var sumPurchases;
 
